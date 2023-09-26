@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <script>
+        function ageCalculator() {
+            var bornDate = new Date(document.getElementById("born").value);
+            var today = new Date();
+            var years;
+            var months;
+            var days;
+            var mDays = [31,29,31,30,31,30,31,31,30,31,30,31]
+
+            if (today.getMonth() >= bornDate.getMonth()) {
+                years = today.getFullYear() - bornDate.getFullYear();
+            } else {
+                years = today.getFullYear() - bornDate.getFullYear() - 1;
+            }
+
+            if (today.getDate() >= bornDate.getDate()) {
+                months = today.getMonth() - bornDate.getMonth();
+            } else if (today.getDate() < bornDate.getDate()) {
+                months = months = today.getMonth() - bornDate.getMonth() - 1;
+            }
+            months = months < 0 ? months + 12 : months;
+
+            if(today.getDate() >= bornDate.getDate()){
+                days = today.getDate() - bornDate.getDate();
+            }else{
+                days = today.getDate() - bornDate.getDate() + mDays[bornDate.getMonth()];
+            }
+
+
+            document.getElementById("result").value ="You lived: "+ years + " years, " +
+                months + " months and " +
+                days + " days";
+
+        }
+
+
+    </script>
+
+</head>
+<body>
+    <form>
+        <label id="bornL" for="born">What is your born date?</label>
+        <input id="born" type="date" name="born">
+        <input id="submit" type="button" value="submit" onclick="ageCalculator()">
+        <br>
+        <input type="text" id="result" name="result" style="width: 500px;">
+    </form>
+</body>
+</html>
